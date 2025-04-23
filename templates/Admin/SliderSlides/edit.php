@@ -32,7 +32,16 @@
                     $this->Form->file('uploads', [
                         'accept' => 'image/*',
                         'id' => 'sliders-image-input',
-                        'append' => $this->Form->postLink('<i class="fa-solid fa-lg fa-eraser"></i>', ['action' => 'deleteFiles', $sliderSlide->id], ['method' => 'delete', 'block' => true, 'escape' => false, 'class' => 'text-danger'])
+                        'append' => $this->Form->deleteLink('<i class="fa-solid fa-lg fa-eraser"></i>', ['action' => 'deleteFiles', $sliderSlide->id],
+                                [
+                                    'block' => true,
+                                    'escape' => false,
+                                    'confirm' => __('Are you sure you want to delete {0}?', $sliderSlide->id),
+                                    'class' => 'text-danger',
+                                    'data-bs-toggle' => 'modal',
+                                    'data-bs-target' => '#confirm-modal'
+                                ]
+                        )
                     ]);
                     ?>
                 </div>  
