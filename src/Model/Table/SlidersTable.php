@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Slideshow\Model\Table;
@@ -21,7 +20,6 @@ use Cake\Validation\Validator;
  */
 class SlidersTable extends Table
 {
-
     /**
      * Initialize method
      *
@@ -38,7 +36,7 @@ class SlidersTable extends Table
 
         $this->hasMany('SliderSlides', [
             'foreignKey' => 'slider_id',
-            'className' => 'Slideshow.SliderSlides'
+            'className' => 'Slideshow.SliderSlides',
         ]);
     }
 
@@ -48,7 +46,7 @@ class SlidersTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator): \Cake\Validation\Validator
+    public function validationDefault(Validator $validator): Validator
     {
         $validator
                 ->nonNegativeInteger('id')

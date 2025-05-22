@@ -1,26 +1,28 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Slideshow\Controller\Admin;
 
 use App\Controller\Admin\AppController;
 use App\Lib\ImageUploadHandler;
-use App\Lib\PluginManager;
+use App\Lib\PluginExplorer;
 use Cake\Cache\Cache;
 use Cake\Event\EventInterface;
+use Cake\Http\Response;
+use Override;
 
 /**
  * SliderSlides Controller
  *
  * @property \Slideshow\Model\Table\SliderSlidesTable $SliderSlides
- *
  * @method \Slideshow\Model\Entity\SliderSlide[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class SliderSlidesController extends AppController
 {
-
-    #[\Override]
+    /**
+     * @inheritDoc
+     */
+    #[Override]
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
@@ -36,7 +38,7 @@ class SliderSlidesController extends AppController
      * @param string|null $id Slider id.
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add($id = null)
+    public function add(?string $id = null)
     {
         $sliderSlide = $this->SliderSlides->newEmptyEntity();
         $sliderSlide->slider_id = $id;
@@ -51,10 +53,10 @@ class SliderSlidesController extends AppController
                 $handler = new ImageUploadHandler([
                     'thumbs' => [
                         'lg' => [$slider->width, $slider->height],
-                        'sm' => 200
+                        'sm' => 200,
                     ],
                     'format' => $images['format'],
-                    'quality' => $images['quality']
+                    'quality' => $images['quality'],
                 ]);
 
                 $upload = $this->request->getUploadedFile('uploads');
@@ -65,6 +67,7 @@ class SliderSlidesController extends AppController
                 }
 
                 $this->Flash->success(__('Slide has been added.'));
+
                 return $this->redirect(['controller' => 'Sliders', 'action' => 'view', $id]);
             }
 
@@ -81,7 +84,7 @@ class SliderSlidesController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(?string $id = null)
     {
         $sliderSlide = $this->SliderSlides->get($id, contain: ['Sliders']);
 
@@ -94,10 +97,10 @@ class SliderSlidesController extends AppController
                 $handler = new ImageUploadHandler([
                     'thumbs' => [
                         'lg' => [$sliderSlide->slider->width, $sliderSlide->slider->height],
-                        'sm' => 200
+                        'sm' => 200,
                     ],
                     'format' => $images['format'],
-                    'quality' => $images['quality']
+                    'quality' => $images['quality'],
                 ]);
 
                 $upload = $this->request->getUploadedFile('uploads');
@@ -108,6 +111,7 @@ class SliderSlidesController extends AppController
                 }
 
                 $this->Flash->success(__('The slide has been saved.'));
+
                 return $this->redirect(['controller' => 'Sliders', 'action' => 'view', $sliderSlide->slider_id]);
             }
             $this->Flash->error(__('The slide could not be saved. Please, try again.'));
@@ -124,7 +128,7 @@ class SliderSlidesController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete(?string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $sliderSlide = $this->SliderSlides->get($id);
@@ -140,7 +144,13 @@ class SliderSlidesController extends AppController
         return $this->redirect(['controller' => 'Sliders', 'action' => 'view', $sliderSlide->slider_id]);
     }
 
-    public function moveUp($id = null)
+    /**
+     * Moves slide up
+     *
+     * @param string $id
+     * @return \Cake\Http\Response|null
+     */
+    public function moveUp(?string $id = null)
     {
         $this->request->allowMethod(['post', 'put']);
         $sliderSlide = $this->SliderSlides->get($id);
@@ -149,10 +159,17 @@ class SliderSlidesController extends AppController
         } else {
             $this->Flash->error('The slide could not be moved up. Please, try again.');
         }
+
         return $this->redirect(['controller' => 'Sliders', 'action' => 'view', $sliderSlide->slider_id]);
     }
 
-    public function moveDown($id = null)
+    /**
+     * Moves slide down
+     *
+     * @param string $id
+     * @return \Cake\Http\Response|null
+     */
+    public function moveDown(?string $id = null)
     {
         $this->request->allowMethod(['post', 'put']);
         $sliderSlide = $this->SliderSlides->get($id);
@@ -161,10 +178,17 @@ class SliderSlidesController extends AppController
         } else {
             $this->Flash->error('The slide could not be moved down. Please, try again.');
         }
+
         return $this->redirect(['controller' => 'Sliders', 'action' => 'view', $sliderSlide->slider_id]);
     }
 
-    public function deleteFiles($id)
+    /**
+     * Deletes loaded file
+     *
+     * @param string|null $id
+     * @return \Cake\Http\Response|null
+     */
+    public function deleteFiles(?string $id = null): ?Response
     {
         $this->request->allowMethod(['post', 'delete']);
         $sliderSlide = $this->SliderSlides->get($id);
@@ -174,10 +198,19 @@ class SliderSlidesController extends AppController
         return $this->redirect($this->referer());
     }
 
-    public function getLinks()
+    /**
+     * Gets plugin links
+     *
+     * @param \App\Lib\PluginExplorer $pe Plugin explorer.
+     * @return void
+     */
+    public function getLinks(PluginExplorer $pe)
     {
-        $pm = new PluginManager();
-        $data = $pm->getLinks();
+        /** @var \App\Model\Table\PluginsTable $table */
+        $table = $this->fetchTable('Plugins');
+        $activePlugins = $table->getActivePlugins();
+
+        $data = $pe->getLinks($activePlugins);
 
         $this->set(compact('data'));
     }

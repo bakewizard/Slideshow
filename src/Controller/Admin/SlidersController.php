@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Slideshow\Controller\Admin;
@@ -12,12 +11,13 @@ use Cake\Event\EventInterface;
  * Sliders Controller
  *
  * @property \Slideshow\Model\Table\SlidersTable $Sliders
- *
  * @method \Slideshow\Model\Entity\Slider[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class SlidersController extends AppController
 {
-
+    /**
+     * @inheritDoc
+     */
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
@@ -29,7 +29,7 @@ class SlidersController extends AppController
 
     /**
      * Sliders list
-     * 
+     *
      * Displays a sliders list
      *
      * @return \Cake\Http\Response|null
@@ -48,7 +48,7 @@ class SlidersController extends AppController
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view(?string $id = null)
     {
         $slider = $this->Sliders->get($id, contain: ['SliderSlides']);
 
@@ -57,7 +57,7 @@ class SlidersController extends AppController
 
     /**
      * New Slider
-     * 
+     *
      * Creates a slider
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
@@ -70,6 +70,7 @@ class SlidersController extends AppController
             $savedSlider = $this->Sliders->save($slider);
             if ($savedSlider) {
                 $this->Flash->success(__('The slider has been saved. Now you can add some slides.'));
+
                 return $this->redirect(['action' => 'view', $savedSlider->id]);
             }
             $this->Flash->error(__('The slider could not be saved. Please, try again.'));
@@ -84,7 +85,7 @@ class SlidersController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(?string $id = null)
     {
         $slider = $this->Sliders->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -106,7 +107,7 @@ class SlidersController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete(?string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $slider = $this->Sliders->get($id, contain: ['SliderSlides']);

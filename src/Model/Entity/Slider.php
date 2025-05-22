@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Slideshow\Model\Entity;
@@ -18,7 +17,6 @@ use Cake\ORM\Entity;
  */
 class Slider extends Entity
 {
-
     protected array $_accessible = [
         'title' => true,
         'description' => true,
@@ -26,5 +24,4 @@ class Slider extends Entity
         'height' => true,
         'delay' => true,
     ];
-
 }

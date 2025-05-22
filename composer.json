@@ -3,7 +3,13 @@
     "description": "Slideshow plugin for BakeKit CMS",
     "license": "MIT",
     "type": "cakephp-plugin",
-    "keywords": ["cakephp", "plugin", "image-gallery", "carousel", "bakekit"],
+    "keywords": [
+        "cakephp",
+        "plugin",
+        "image-gallery",
+        "carousel",
+        "bakekit"
+    ],
     "require": {
         "php": ">=8.1",
         "cakephp/cakephp": "5.2.*"

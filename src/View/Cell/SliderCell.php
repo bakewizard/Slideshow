@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Slideshow\View\Cell;
@@ -11,15 +10,14 @@ use App\View\Cell\BlockCell as Cell;
  */
 class SliderCell extends Cell
 {
-
     /**
      * Slider
-     * 
+     *
      * Displays slides
      *
      * @return void
      */
-    public function display()
+    public function display(): void
     {
         $lang = $this->request->getParam('lang');
         $id = $this->block->params['slider'] ?? null;

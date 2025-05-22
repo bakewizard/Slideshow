@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Slideshow\Model\Table;
@@ -12,7 +11,6 @@ use Cake\Validation\Validator;
  * SliderSlides Model
  *
  * @property \Slideshow\Model\Table\SlideshowSlidersTable&\Cake\ORM\Association\BelongsTo $SlideshowSliders
- *
  * @method \Slideshow\Model\Entity\SliderSlide get($primaryKey, $options = [])
  * @method \Slideshow\Model\Entity\SliderSlide newEntity($data = null, array $options = [])
  * @method \Slideshow\Model\Entity\SliderSlide[] newEntities(array $data, array $options = [])
@@ -24,7 +22,6 @@ use Cake\Validation\Validator;
  */
 class SliderSlidesTable extends Table
 {
-
     /**
      * Initialize method
      *
@@ -47,7 +44,7 @@ class SliderSlidesTable extends Table
 
         $this->addBehavior('Translate', [
             'fields' => ['title', 'description', 'url'],
-            'translationTable' => 'SlideshowSliderSlidesI18n'
+            'translationTable' => 'SlideshowSliderSlidesI18n',
         ]);
 
         $this->addBehavior('ADmad/Sequence.Sequence', [

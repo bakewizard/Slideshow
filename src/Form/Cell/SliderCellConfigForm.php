@@ -1,12 +1,11 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Slideshow\Form\Cell;
 
-use Cake\Datasource\FactoryLocator;
 use Cake\Form\Form;
 use Cake\Form\Schema;
+use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
 
 /**
@@ -14,14 +13,19 @@ use Cake\Validation\Validator;
  */
 class SliderCellConfigForm extends Form
 {
+    /**
+     * @var array
+     */
+    private array $sliders;
 
-    private $sliders;
-
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         parent::__construct();
-        $labels = FactoryLocator::get('Table')->get('Slideshow.Sliders');
-        $this->sliders = $labels->find('list');
+        $labels = TableRegistry::getTableLocator()->get('Slideshow.Sliders');
+        $this->sliders = $labels->find('list')->toArray();
     }
 
     /**
@@ -46,9 +50,13 @@ class SliderCellConfigForm extends Form
         return $validator->nonNegativeInteger('slider');
     }
 
-    public function getSliders()
+    /**
+     * Sliders list
+     *
+     * @return array
+     */
+    public function getSliders(): array
     {
         return $this->sliders;
     }
-
 }
