@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var object $block
+ * @var object $settings
+ */
+?>
 <div class="card card-primary card-outline">
     <div class="card-header">
         <div class="card-title"><i class="fa-solid fa-edit"></i><?= __('Slider cell') ?></div>

@@ -14,10 +14,12 @@ use Cake\ORM\Entity;
  * @property string|null $description
  * @property string $url
  * @property string|null $target
- * @property int|null $sort_order
  * @property bool $enabled
  *
- * @property \Slideshow\Model\Entity\SlideshowSlider $slideshow_slider
+ * @property string $path
+ * @property int|null $position
+ * @property \Slideshow\Model\Entity\Slider $slider
+ * @property array<\Cake\ORM\Entity> $_i18n
  */
 class SliderSlide extends Entity
 {

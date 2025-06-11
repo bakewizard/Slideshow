@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var object $block
+ * @var array $slides
+ */
+?>
 <?php if (!empty($slides)): ?>
     <div id="carousel-<?= $block->alias ?>" class="carousel slide" data-bs-ride="carousel" data-bs-interval="<?= $slides[0]->slider->delay ?>">
         <?php if (count($slides) > 1): ?>

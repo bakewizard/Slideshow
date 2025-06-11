@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var array<\Slideshow\Model\Entity\Slider>|\Cake\Collection\CollectionInterface<\Slideshow\Model\Entity\Slider> $sliders
+ */
+?>
 <?php $this->assign('page', __('Slideshow')); ?>
 <div class="card">
     <div class="card-header">

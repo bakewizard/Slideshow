@@ -10,15 +10,24 @@ use Cake\Validation\Validator;
 /**
  * SliderSlides Model
  *
- * @property \Slideshow\Model\Table\SlideshowSlidersTable&\Cake\ORM\Association\BelongsTo $SlideshowSliders
- * @method \Slideshow\Model\Entity\SliderSlide get($primaryKey, $options = [])
- * @method \Slideshow\Model\Entity\SliderSlide newEntity($data = null, array $options = [])
- * @method \Slideshow\Model\Entity\SliderSlide[] newEntities(array $data, array $options = [])
- * @method \Slideshow\Model\Entity\SliderSlide|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \Slideshow\Model\Entity\SliderSlide saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \Slideshow\Model\Entity\SliderSlide get(mixed $primaryKey, array|string $finder = 'all', \Psr\SimpleCache\CacheInterface|string|null $cache = null, \Closure|string|null $cacheKey = null, mixed ...$args)
+ * @method \Slideshow\Model\Entity\SliderSlide newEntity(array $data, array $options = [])
+ * @method array<\Slideshow\Model\Entity\SliderSlide> newEntities(array $data, array $options = [])
+ * @method \Slideshow\Model\Entity\SliderSlide|false save(\Cake\Datasource\EntityInterface $entity, array $options = [])
+ * @method \Slideshow\Model\Entity\SliderSlide saveOrFail(\Cake\Datasource\EntityInterface $entity, array $options = [])
  * @method \Slideshow\Model\Entity\SliderSlide patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \Slideshow\Model\Entity\SliderSlide[] patchEntities($entities, array $data, array $options = [])
- * @method \Slideshow\Model\Entity\SliderSlide findOrCreate($search, callable $callback = null, $options = [])
+ * @method array<\Slideshow\Model\Entity\SliderSlide> patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \Slideshow\Model\Entity\SliderSlide findOrCreate(\Cake\ORM\Query\SelectQuery|callable|array $search, ?callable $callback = null, array $options = [])
+ * @property \Slideshow\Model\Table\SlidersTable&\Cake\ORM\Association\BelongsTo $Sliders
+ * @property \Cake\ORM\Table&\Cake\ORM\Association\HasMany $SlideshowSliderSlidesI18n
+ * @method \Slideshow\Model\Entity\SliderSlide newEmptyEntity()
+ * @method \Cake\Datasource\ResultSetInterface<\Slideshow\Model\Entity\SliderSlide>|false saveMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Slideshow\Model\Entity\SliderSlide> saveManyOrFail(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Slideshow\Model\Entity\SliderSlide>|false deleteMany(iterable $entities, array $options = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Slideshow\Model\Entity\SliderSlide> deleteManyOrFail(iterable $entities, array $options = [])
+ * @mixin \Cake\ORM\Behavior\TranslateBehavior
+ * @mixin \ADmad\Sequence\Model\Behavior\SequenceBehavior
+ * @extends \Cake\ORM\Table<array{Sequence: \ADmad\Sequence\Model\Behavior\SequenceBehavior, Translate: \Cake\ORM\Behavior\TranslateBehavior}>
  */
 class SliderSlidesTable extends Table
 {

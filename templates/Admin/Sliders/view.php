@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \Slideshow\Model\Entity\Slider $slider
+ */
+?>
 <div class="card card-primary card-outline">
     <div class="card-header">
         <div class="card-title"><i class="fa-solid fa-eye me-2"></i><?= h($slider->title) ?> <?= __('slides') ?></div>

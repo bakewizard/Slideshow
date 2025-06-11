@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <div class="card">
     <div class="card-header">
         <div class="card-title"><i class="fa-solid fa-tachometer-alt me-2"></i>Dashboard</div>

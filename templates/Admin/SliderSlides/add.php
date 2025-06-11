@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var mixed $targets
+ * @var \Slideshow\Model\Entity\SliderSlide $sliderSlide
+ */
+?>
 <?= $this->Html->script(['/backend/plugins/tinymce/tinymce.min', '/backend/js/menus', 'Slideshow.backend/slide'], ['block' => true]) ?>
 
 <?= $this->element('form/link_select_modal') ?>

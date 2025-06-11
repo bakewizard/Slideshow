@@ -11,7 +11,10 @@ use Cake\Event\EventInterface;
  * Sliders Controller
  *
  * @property \Slideshow\Model\Table\SlidersTable $Sliders
- * @method \Slideshow\Model\Entity\Slider[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \Cake\Datasource\ResultSetInterface<\Slideshow\Model\Entity\Slider> paginate(\Cake\Datasource\RepositoryInterface|\Cake\Datasource\QueryInterface|string|null $object = null, array $settings = [])
+ * @property \Search\Controller\Component\SearchComponent $Search
+ * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
+ * @property \Authorization\Controller\Component\AuthorizationComponent $Authorization
  */
 class SlidersController extends AppController
 {
@@ -32,7 +35,7 @@ class SlidersController extends AppController
      *
      * Displays a sliders list
      *
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|void
      */
     public function index()
     {
@@ -45,7 +48,7 @@ class SlidersController extends AppController
      * View method
      *
      * @param string|null $id Slider id.
-     * @return \Cake\Http\Response|null
+     * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view(?string $id = null)
@@ -60,7 +63,7 @@ class SlidersController extends AppController
      *
      * Creates a slider
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add()
     {
@@ -82,7 +85,7 @@ class SlidersController extends AppController
      * Edit method
      *
      * @param string|null $id Slider id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit(?string $id = null)

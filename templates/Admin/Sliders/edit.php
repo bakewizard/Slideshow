@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \Slideshow\Model\Entity\Slider $slider
+ */
+?>
 <div class="card card-success card-outline">
     <div class="card-header">
         <div class="card-title"><i class="fa-solid fa-edit me-2"></i><?= __('Edit Slider') ?> <span class="badge badge-info"><?= $slider->width . ' x ' . $slider->height ?></span></div>

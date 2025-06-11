@@ -14,6 +14,7 @@ use Cake\ORM\Entity;
  * @property int $width
  * @property int $height
  * @property int $delay
+ * @property array<\Slideshow\Model\Entity\SliderSlide> $slider_slides
  */
 class Slider extends Entity
 {

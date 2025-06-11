@@ -5,7 +5,7 @@ namespace Slideshow\Controller\Admin;
 
 use App\Controller\Admin\AppController;
 use App\Lib\ImageUploadHandler;
-use App\Lib\PluginExplorer;
+use App\Lib\ResourcesExplorer;
 use Cake\Cache\Cache;
 use Cake\Event\EventInterface;
 use Cake\Http\Response;
@@ -15,7 +15,9 @@ use Override;
  * SliderSlides Controller
  *
  * @property \Slideshow\Model\Table\SliderSlidesTable $SliderSlides
- * @method \Slideshow\Model\Entity\SliderSlide[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \Search\Controller\Component\SearchComponent $Search
+ * @property \Authentication\Controller\Component\AuthenticationComponent $Authentication
+ * @property \Authorization\Controller\Component\AuthorizationComponent $Authorization
  */
 class SliderSlidesController extends AppController
 {
@@ -36,7 +38,7 @@ class SliderSlidesController extends AppController
      * Add method
      *
      * @param string|null $id Slider id.
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
     public function add(?string $id = null)
     {
@@ -81,7 +83,7 @@ class SliderSlidesController extends AppController
      * Edit method
      *
      * @param string|null $id Slider Slide id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit(?string $id = null)
@@ -201,16 +203,16 @@ class SliderSlidesController extends AppController
     /**
      * Gets plugin links
      *
-     * @param \App\Lib\PluginExplorer $pe Plugin explorer.
+     * @param \App\Lib\ResourcesExplorer $re
      * @return void
      */
-    public function getLinks(PluginExplorer $pe)
+    public function getLinks(ResourcesExplorer $re)
     {
         /** @var \App\Model\Table\PluginsTable $table */
         $table = $this->fetchTable('Plugins');
         $activePlugins = $table->getActivePlugins();
 
-        $data = $pe->getLinks($activePlugins);
+        $data = $re->getLinks($activePlugins);
 
         $this->set(compact('data'));
     }

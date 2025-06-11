@@ -39,7 +39,7 @@ class SlideshowPlugin extends CmsPlugin
     public function routes(RouteBuilder $routes): void
     {
         $routes->prefix('Admin', function (RouteBuilder $builder): void {
-            $builder->plugin($this->name, function (RouteBuilder $builder): void {
+            $builder->plugin($this->name ?? 'Slideshow', function (RouteBuilder $builder): void {
                 $builder->applyMiddleware('auth');
                 $builder->connect('/', ['controller' => 'Dashboard']);
                 $builder->fallbacks(DashedRoute::class);
