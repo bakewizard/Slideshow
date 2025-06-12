@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Slideshow\Controller\Admin;
 
 use App\Controller\Admin\AppController;
+use App\Lib\ImageUploadHandler;
 use Cake\Cache\Cache;
 use Cake\Event\EventInterface;
 
@@ -115,7 +117,9 @@ class SlidersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $slider = $this->Sliders->get($id, contain: ['SliderSlides']);
         if ($this->Sliders->delete($slider)) {
-            $this->Sliders->SliderSlides->behaviors()->get('Image')->deleteImages($slider->slider_slides);
+            $handler = new ImageUploadHandler();
+            $handler->remove($slider->slider_slides);
+
             $this->Flash->success(__('The slider has been deleted.'));
         } else {
             $this->Flash->error(__('The slider could not be deleted. Please, try again.'));
