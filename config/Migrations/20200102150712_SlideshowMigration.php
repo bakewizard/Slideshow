@@ -1,14 +1,19 @@
 <?php
 
-declare(strict_types=1);
+use Migrations\BaseMigration;
 
-use Migrations\AbstractMigration;
-
-class Initial extends AbstractMigration
+class SlideshowMigration extends BaseMigration
 {
-
     public bool $autoId = false;
 
+    /**
+     * Up Method.
+     *
+     * More information on this method is available here:
+     * https://book.cakephp.org/phinx/0/en/migrations.html#the-up-method
+     *
+     * @return void
+     */
     public function up(): void
     {
         $this->table('slideshow_sliders')
@@ -87,7 +92,7 @@ class Initial extends AbstractMigration
                 ->addColumn('path', 'string', [
                     'default' => null,
                     'limit' => 50,
-                    'null' => false
+                    'null' => false,
                 ])
                 ->addColumn('position', 'integer', [
                     'default' => null,
@@ -136,6 +141,14 @@ class Initial extends AbstractMigration
                 ->create();
     }
 
+    /**
+     * Down Method.
+     *
+     * More information on this method is available here:
+     * https://book.cakephp.org/phinx/0/en/migrations.html#the-down-method
+     *
+     * @return void
+     */
     public function down(): void
     {
         $this->table('slideshow_slider_slides_i18n')->drop()->save();

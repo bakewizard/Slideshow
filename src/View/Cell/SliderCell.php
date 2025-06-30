@@ -28,8 +28,8 @@ class SliderCell extends Cell
                 ->contain(['Sliders'])
                 ->orderBy(['position' => 'ASC'])
                 ->cache(function ($q) use ($id, $lang) {
-                    if(!is_null($id)){
-                        return $lang ? "{id}_{lang}" : $id;
+                    if (!is_null($id)) {
+                        return $lang ? '{id}_{lang}' : $id;
                     }
                 }, 'slideshow')
                 ->toArray();
