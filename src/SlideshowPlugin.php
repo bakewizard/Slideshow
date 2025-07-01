@@ -25,12 +25,15 @@ class SlideshowPlugin extends CmsPlugin
      */
     public function bootstrap(PluginApplicationInterface $app): void
     {
-        Cache::setConfig('slideshow', [
-            'className' => FileEngine::class,
-            'prefix' => 'sldr_',
-            'path' => CACHE . 'slideshow' . DS,
-            'duration' => '+6 months',
-        ]);
+        if (!Cache::getConfig('slideshow')) {
+            Cache::setConfig('slideshow', [
+                'className' => FileEngine::class,
+                'path' => CACHE . 'slideshow' . DS,
+                'duration' => '+1 years',
+                'prefix' => 'sldr_',
+                'serialize' => true,
+            ]);
+        }
     }
 
     /**

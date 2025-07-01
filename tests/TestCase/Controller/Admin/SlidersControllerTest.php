@@ -9,7 +9,7 @@ use Cake\TestSuite\TestCase;
 /**
  * Slideshow\Controller\Admin\SlidersController Test Case
  *
- * @uses \Slideshow\Controller\Admin\SlidersController
+ * @link \Slideshow\Controller\Admin\SlidersController
  */
 class SlidersControllerTest extends TestCase
 {
@@ -63,7 +63,7 @@ class SlidersControllerTest extends TestCase
      * Test view method
      *
      * @return void
-     * @uses \Slideshow\Controller\Admin\SlidersController::index()
+     * @link \Slideshow\Controller\Admin\SlidersController::index()
      */
     public function testIndex(): void
     {
@@ -77,7 +77,7 @@ class SlidersControllerTest extends TestCase
      * Test view method
      *
      * @return void
-     * @uses \Slideshow\Controller\Admin\SlidersController::view()
+     * @link \Slideshow\Controller\Admin\SlidersController::view()
      */
     public function testView(): void
     {
@@ -92,7 +92,7 @@ class SlidersControllerTest extends TestCase
      * Test add method
      *
      * @return void
-     * @uses \Slideshow\Controller\Admin\SlidersController::add()
+     * @link \Slideshow\Controller\Admin\SlidersController::add()
      */
     public function testAddGet(): void
     {
@@ -104,7 +104,7 @@ class SlidersControllerTest extends TestCase
      * Test add post method
      *
      * @return void
-     * @uses \Slideshow\Controller\Admin\SlidersController::add()
+     * @link \Slideshow\Controller\Admin\SlidersController::add()
      */
     public function testAddPost(): void
     {
@@ -124,7 +124,7 @@ class SlidersControllerTest extends TestCase
      * Test edit method
      *
      * @return void
-     * @uses \Slideshow\Controller\Admin\SlidersController::edit()
+     * @link \Slideshow\Controller\Admin\SlidersController::edit()
      */
     public function testEditGet(): void
     {
@@ -136,7 +136,7 @@ class SlidersControllerTest extends TestCase
      * Test edit post method
      *
      * @return void
-     * @uses \Slideshow\Controller\Admin\SlidersController::edit()
+     * @link \Slideshow\Controller\Admin\SlidersController::edit()
      */
     public function testEditPost(): void
     {
@@ -156,7 +156,7 @@ class SlidersControllerTest extends TestCase
      * Test delete method
      *
      * @return void
-     * @uses \Slideshow\Controller\Admin\SlidersController::delete()
+     * @link \Slideshow\Controller\Admin\SlidersController::delete()
      */
     public function testDeletePost(): void
     {
