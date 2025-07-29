@@ -14,8 +14,8 @@
         <?= $this->Form->control('slider', ['options' => $settings->getSliders(), 'empty' => '------']); ?>
     </div>
     <div class="card-footer">
-        <?= $this->Form->button('<i class="fa-solid fa-save"></i> ' . __('Save'), ['class' => 'btn-success float-end', 'escapeTitle' => false]) ?>
-        <?= $this->Html->link('<i class="fa-solid fa-times-circle"></i> ' . __('Cancel'), ['controller' => 'Regions', 'action' => 'view', $block->region_id], ['class' => 'btn btn-danger', 'escape' => false]) ?>
+        <?= $this->Form->button('<i class="fa-solid fa-save"></i> ' . __('Save'), ['class' => 'btn-outline-success float-end', 'escapeTitle' => false]) ?>
+        <?= $this->Html->link('<i class="fa-solid fa-times-circle"></i> ' . __('Cancel'), ['controller' => 'Regions', 'action' => 'view', $block->region_id], ['class' => 'btn btn-outline-danger', 'escape' => false]) ?>
     </div>
     <?= $this->Form->end() ?>
 </div>
