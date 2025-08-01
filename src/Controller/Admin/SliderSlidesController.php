@@ -121,23 +121,11 @@ class SliderSlidesController extends AppController
 
                 $upload = $this->request->getUploadedFile('uploads');
 
-                if ($upload === null || $upload->getError() === UPLOAD_ERR_NO_FILE) {
-                    $this->Flash->error(__('No file was uploaded.'));
-
-                    return $this->redirect(['action' => 'index']);
+                if ($upload !== null && $upload->getError() === UPLOAD_ERR_OK) {
+                    // @phpstan-ignore property.notFound
+                    $sliderSlide->tmp_name = $upload->getStream()->getMetadata('uri');
+                    $handler->handle([$sliderSlide]);
                 }
-
-                $error = $upload->getError();
-                if ($error !== UPLOAD_ERR_OK) {
-                    $message = UploadedFile::ERROR_MESSAGES[$error] ?? __('Unknown upload error.');
-                    $this->Flash->error($message);
-
-                    return $this->redirect(['action' => 'index']);
-                }
-
-                // @phpstan-ignore property.notFound
-                $sliderSlide->tmp_name = $upload->getStream()->getMetadata('uri');
-                $handler->handle([$sliderSlide]);
 
                 $this->Flash->success(__('The slide has been saved.'));
 
