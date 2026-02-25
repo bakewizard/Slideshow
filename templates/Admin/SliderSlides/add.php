@@ -5,7 +5,7 @@
  * @var \Slideshow\Model\Entity\SliderSlide $sliderSlide
  */
 ?>
-<?= $this->Html->script(['/backend/plugins/tinymce/tinymce.min', '/backend/js/menus', 'Slideshow.backend/slide'], ['block' => true]) ?>
+<?= $this->Html->script(['/backend/plugins/tinymce/tinymce.min', '/backend/js/menus', 'Slideshow.backend/slide'], ['block' => true, 'type' => 'module']) ?>
 
 <?= $this->element('form/link_select_modal') ?>
 
@@ -31,7 +31,7 @@
                 ?>
                 <div class="my-2">
                     <?= $this->Form->file('uploads', ['accept' => 'image/*', 'id' => 'sliders-image-input']); ?>
-                </div>  
+                </div>
             </div>
         </div>
         <?=
