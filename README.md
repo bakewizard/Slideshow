@@ -6,7 +6,7 @@ Slideshow Plugin for BakeKit
 [![PHP Version](https://img.shields.io/badge/PHP-8.3%2B-blue)](https://php.net)
 [![GitHub release](https://img.shields.io/github/v/release/bakewizard/Slideshow?label=stable&sort=semver)](https://github.com/bakewizard/bakekit/releases)
 
-The `Slideshow` plugin allows you to create and manage image slideshows or carousels in [BakeKit CMS](https://github.com/bakewizard/BakeKit).
+The `Slideshow` plugin allows you to create and manage image slideshows or carousels in [BakeKit](https://github.com/bakewizard/BakeKit).
 
 ## Features
 
