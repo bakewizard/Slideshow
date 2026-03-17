@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Slideshow\View\Cell;
 
+use App\Attribute\Link;
 use App\View\Cell\BlockCell as Cell;
 
 /**
@@ -17,22 +18,23 @@ class SliderCell extends Cell
      *
      * @return void
      */
+    #[Link(summary: 'Slider', description: 'Displays slides')]
     public function display(): void
     {
         $lang = $this->request->getParam('lang');
         $id = $this->block->params['slider'] ?? null;
 
         $slides = $this->fetchTable('Slideshow.SliderSlides')
-                ->find()
-                ->where(['enabled' => true, 'slider_id is' => $id])
-                ->contain(['Sliders'])
-                ->orderBy(['position' => 'ASC'])
-                ->cache(function ($q) use ($id, $lang) {
-                    if (!is_null($id)) {
-                        return $lang ? "{$id}_{$lang}" : $id;
-                    }
-                }, 'slideshow')
-                ->toArray();
+            ->find()
+            ->where(['enabled' => true, 'slider_id is' => $id])
+            ->contain(['Sliders'])
+            ->orderBy(['position' => 'ASC'])
+            ->cache(function ($q) use ($id, $lang) {
+                if (!is_null($id)) {
+                    return $lang ? "{$id}_{$lang}" : $id;
+                }
+            }, 'slideshow')
+            ->toArray();
 
         $this->set(compact('slides'));
     }
