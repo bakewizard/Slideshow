@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Slideshow\Controller\Admin;
 
+use App\Attribute\Resource;
 use App\Controller\Admin\AppController;
 use App\Lib\ImageUploadHandler;
 use App\Lib\ResourcesExplorer;
@@ -41,6 +42,7 @@ class SliderSlidesController extends AppController
      * @param string $id Slider id.
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
+    #[Resource(label: 'Add a slide')]
     public function add(string $id)
     {
         $sliderSlide = $this->SliderSlides->newEmptyEntity();
@@ -100,6 +102,7 @@ class SliderSlidesController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    #[Resource(label: 'Edit a slide')]
     public function edit(?string $id = null)
     {
         $sliderSlide = $this->SliderSlides->get($id, contain: ['Sliders']);
@@ -145,6 +148,7 @@ class SliderSlidesController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    #[Resource(label: 'Delete a slide')]
     public function delete(?string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Slideshow\Controller\Admin;
 
+use App\Attribute\Resource;
 use App\Controller\Admin\AppController;
 use App\Lib\ImageUploadHandler;
 use Cake\Cache\Cache;
@@ -38,6 +39,7 @@ class SlidersController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+    #[Resource(label: 'List sliders')]
     public function index()
     {
         $sliders = $this->paginate($this->Sliders);
@@ -52,6 +54,7 @@ class SlidersController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    #[Resource(label: 'View slider slides')]
     public function view(?string $id = null)
     {
         $slider = $this->Sliders->get($id, contain: ['SliderSlides']);
@@ -66,6 +69,7 @@ class SlidersController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
+    #[Resource(label: 'Create a slider')]
     public function add()
     {
         $slider = $this->Sliders->newEmptyEntity();
@@ -89,6 +93,7 @@ class SlidersController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    #[Resource(label: 'Edit a slider')]
     public function edit(?string $id = null)
     {
         $slider = $this->Sliders->get($id);
@@ -111,6 +116,7 @@ class SlidersController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+    #[Resource(label: 'Delete a slider')]
     public function delete(?string $id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
