@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use Migrations\BaseMigration;
 
@@ -87,7 +88,7 @@ class SlideshowMigration extends BaseMigration
             ->addColumn('target', 'string', [
                 'default' => '_self',
                 'limit' => 10,
-                'null' => true,
+                'null' => false,
             ])
             ->addColumn('path', 'string', [
                 'default' => null,

@@ -32,26 +32,11 @@
                     'width' => 200,
                     'height' => 200,
                     'class' => 'img-thumbnail',
-                    'id' => 'sliders-image'
+                    'id' => 'image-preview'
                 ]);
                 ?>
                 <div class="my-2">
-                    <?=
-                    $this->Form->file('uploads', [
-                        'accept' => 'image/*',
-                        'id' => 'sliders-image-input',
-                        'append' => $this->Form->deleteLink('<i class="fa-solid fa-lg fa-eraser"></i>', ['action' => 'deleteFiles', $sliderSlide->id],
-                                [
-                                    'block' => true,
-                                    'escape' => false,
-                                    'confirm' => __('Are you sure you want to delete {0}?', $sliderSlide->id),
-                                    'class' => 'text-danger',
-                                    'data-bs-toggle' => 'modal',
-                                    'data-bs-target' => '#confirm-modal'
-                                ]
-                        )
-                    ]);
-                    ?>
+                    <?= $this->Form->file('uploads', ['accept' => 'image/*',  'id' => 'image-input']); ?>
                 </div>
             </div>
         </div>
@@ -64,7 +49,8 @@
                 'id' => 'link-select-button',
                 'title' => __('Select url'),
                 'data-url' => $this->Url->build(['controller' => 'SliderSlides', 'action' => 'getLinks', $sliderSlide->slider_id])
-        ])]);
+            ])
+        ]);
         ?>
         <?= $this->Form->control('target', ['options' => $targets]); ?>
         <?= $this->Form->control('description'); ?>

@@ -5,7 +5,7 @@ namespace Slideshow\Controller\Admin;
 
 use App\Attribute\Resource;
 use App\Controller\Admin\AppController;
-use App\Lib\ImageUploadHandler;
+use App\Lib\ImageFileHandler;
 use App\Lib\ResourcesExplorer;
 use Cake\Cache\Cache;
 use Cake\Event\EventInterface;
@@ -55,7 +55,7 @@ class SliderSlidesController extends AppController
 
             if ($this->SliderSlides->save($sliderSlide)) {
                 $images = $this->getConfig('Cms.images');
-                $handler = new ImageUploadHandler([
+                $handler = new ImageFileHandler($this->getStorage(WWW_ROOT . 'media'), [
                     'thumbs' => [
                         'lg' => [$slider->width, $slider->height],
                         'sm' => 200,
@@ -113,7 +113,7 @@ class SliderSlidesController extends AppController
 
             if ($this->SliderSlides->save($sliderSlide)) {
                 $images = $this->getConfig('Cms.images');
-                $handler = new ImageUploadHandler([
+                $handler = new ImageFileHandler($this->getStorage(WWW_ROOT . 'media'), [
                     'thumbs' => [
                         'lg' => [$sliderSlide->slider->width, $sliderSlide->slider->height],
                         'sm' => 200,
@@ -154,7 +154,7 @@ class SliderSlidesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $sliderSlide = $this->SliderSlides->get($id);
         if ($this->SliderSlides->delete($sliderSlide)) {
-            $handler = new ImageUploadHandler();
+            $handler = new ImageFileHandler($this->getStorage(WWW_ROOT . 'media'));
             $handler->remove([$sliderSlide]);
 
             $this->Flash->success(__('The slide has been deleted.'));
@@ -213,7 +213,7 @@ class SliderSlidesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $sliderSlide = $this->SliderSlides->get($id);
-        $handler = new ImageUploadHandler();
+        $handler = new ImageFileHandler($this->getStorage(WWW_ROOT . 'media'));
         $handler->remove([$sliderSlide]);
 
         return $this->redirect($this->referer());

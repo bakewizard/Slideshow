@@ -26,11 +26,11 @@
                     'width' => 200,
                     'height' => 200,
                     'class' => 'img-thumbnail',
-                    'id' => 'sliders-image'
+                    'id' => 'image-preview'
                 ]);
                 ?>
                 <div class="my-2">
-                    <?= $this->Form->file('uploads', ['accept' => 'image/*', 'id' => 'sliders-image-input']); ?>
+                    <?= $this->Form->file('uploads', ['accept' => 'image/*', 'id' => 'image-input']); ?>
                 </div>
             </div>
         </div>

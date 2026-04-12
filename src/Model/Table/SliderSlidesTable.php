@@ -70,36 +70,37 @@ class SliderSlidesTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-                ->nonNegativeInteger('id')
-                ->allowEmptyString('id', null, 'create');
+            ->nonNegativeInteger('id')
+            ->allowEmptyString('id', null, 'create');
 
         $validator
-                ->scalar('title')
-                ->maxLength('title', 100)
-                ->allowEmptyString('title');
+            ->scalar('title')
+            ->maxLength('title', 100)
+            ->allowEmptyString('title');
 
         $validator
-                ->scalar('description')
-                ->allowEmptyString('description');
+            ->scalar('description')
+            ->allowEmptyString('description');
 
         $validator
-                ->scalar('url')
-                ->maxLength('url', 255)
-                ->requirePresence('url', 'create')
-                ->notEmptyString('url');
+            ->scalar('url')
+            ->maxLength('url', 255)
+            ->requirePresence('url', 'create')
+            ->notEmptyString('url');
 
         $validator
-                ->scalar('target')
-                ->maxLength('target', 10)
-                ->allowEmptyString('target');
+            ->scalar('target')
+            ->maxLength('target', 10)
+            ->requirePresence('target', 'create')
+            ->notEmptyString('target');
 
         $validator
-                ->nonNegativeInteger('position')
-                ->allowEmptyString('position');
+            ->nonNegativeInteger('position')
+            ->allowEmptyString('position');
 
         $validator
-                ->boolean('enabled')
-                ->notEmptyString('enabled');
+            ->boolean('enabled')
+            ->notEmptyString('enabled');
 
         return $validator;
     }

@@ -1,4 +1,4 @@
-document.getElementById('sliders-image-input').addEventListener('change', addImage);
+document.getElementById('image-input').addEventListener('change', onAddImage);
 document.getElementById('description').required = false;
 
 tinyMCE.init({
@@ -53,23 +53,14 @@ function openFileManager(callback, value, meta) {
     });
 }
 
-function addImage(e) {
-    let files = e.target.files;
-    let i, length = files.length;
+function onAddImage(e) {
+    const file = e.target.files[0];
+    if (!file || !file.type.startsWith('image/')) return;
 
-    if (!length)
-        return;
-
-    for (i = 0; i < length; i++) {
-        let file = files[i];
-        if (file.type.match(/image.*/)) {
-            let image = document.getElementById('sliders-image');
-            image.setAttribute('style', 'height:180px');
-            image.setAttribute('src', window.URL.createObjectURL(file));
-            image.addEventListener('load', function () {
-                window.URL.revokeObjectURL(this.src);
-            });
-
-        }
-    }
+    let imagePreview = document.getElementById('image-preview');
+    const url = URL.createObjectURL(file);
+    imagePreview.style.width = '200px';
+    imagePreview.style.height = '200px';
+    imagePreview.src = url;
+    imagePreview.onload = () => URL.revokeObjectURL(url);
 }
