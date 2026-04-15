@@ -5,11 +5,10 @@ namespace Slideshow\Controller\Admin;
 
 use App\Attribute\Resource;
 use App\Controller\Admin\AppController;
-use App\Lib\ImageFileHandler;
+use App\Event\ImageFileHandler;
 use App\Lib\ResourcesExplorer;
 use Cake\Cache\Cache;
 use Cake\Event\EventInterface;
-use Cake\Http\Response;
 use Laminas\Diactoros\UploadedFile;
 use Override;
 
@@ -48,6 +47,16 @@ class SliderSlidesController extends AppController
         $sliderSlide = $this->SliderSlides->newEmptyEntity();
         $sliderSlide->slider_id = (int)$id;
         if ($this->request->is('post')) {
+            $upload = $this->request->getUploadedFile('uploads');
+            $error = $upload?->getError() ?? UPLOAD_ERR_NO_FILE;
+
+            if ($error !== UPLOAD_ERR_OK) {
+                $message = UploadedFile::ERROR_MESSAGES[$error] ?? __('Unknown upload error.');
+                $this->Flash->error($message);
+
+                return $this->redirect(['action' => 'add', $id]);
+            }
+
             $sliderSlide = $this->SliderSlides->patchEntity($sliderSlide, $this->request->getData());
             $sliderSlide->path = '/slides';
 
@@ -63,22 +72,6 @@ class SliderSlidesController extends AppController
                     'format' => $images['format'],
                     'quality' => $images['quality'],
                 ]);
-
-                $upload = $this->request->getUploadedFile('uploads');
-
-                if ($upload === null || $upload->getError() === UPLOAD_ERR_NO_FILE) {
-                    $this->Flash->error(__('No file was uploaded.'));
-
-                    return $this->redirect(['action' => 'index']);
-                }
-
-                $error = $upload->getError();
-                if ($error !== UPLOAD_ERR_OK) {
-                    $message = UploadedFile::ERROR_MESSAGES[$error] ?? __('Unknown upload error.');
-                    $this->Flash->error($message);
-
-                    return $this->redirect(['action' => 'index']);
-                }
 
                 // @phpstan-ignore property.notFound
                 $sliderSlide->tmp_name = $upload->getStream()->getMetadata('uri');
@@ -201,22 +194,6 @@ class SliderSlidesController extends AppController
         }
 
         return $this->redirect(['controller' => 'Sliders', 'action' => 'view', $sliderSlide->slider_id]);
-    }
-
-    /**
-     * Deletes loaded file
-     *
-     * @param string|null $id
-     * @return \Cake\Http\Response|null
-     */
-    public function deleteFiles(?string $id = null): ?Response
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $sliderSlide = $this->SliderSlides->get($id);
-        $handler = new ImageFileHandler($this->getStorage(WWW_ROOT . 'media'));
-        $handler->remove([$sliderSlide]);
-
-        return $this->redirect($this->referer());
     }
 
     /**
