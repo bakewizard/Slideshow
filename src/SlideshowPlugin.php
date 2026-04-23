@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Slideshow;
 
-use App\Core\CmsPlugin;
+use App\Core\BasePlugin;
 use Cake\Cache\Cache;
 use Cake\Cache\Engine\FileEngine;
 use Cake\Core\PluginApplicationInterface;
@@ -13,7 +13,7 @@ use Cake\Routing\RouteBuilder;
 /**
  * Plugin for Slideshow
  */
-class SlideshowPlugin extends CmsPlugin
+class SlideshowPlugin extends BasePlugin
 {
     protected ?string $name = 'Slideshow';
     protected bool $consoleEnabled = false;
