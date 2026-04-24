@@ -63,7 +63,7 @@ class SliderSlidesController extends AppController
             $slider = $this->SliderSlides->Sliders->get($id);
 
             if ($this->SliderSlides->save($sliderSlide)) {
-                $images = $this->getConfig('Cms.images');
+                $images = $this->getConfig('System.images');
                 $handler = new ImageFileHandler($this->getStorage(WWW_ROOT . 'media'), [
                     'thumbs' => [
                         'lg' => [$slider->width, $slider->height],
@@ -105,7 +105,7 @@ class SliderSlidesController extends AppController
             $sliderSlide->path = '/slides';
 
             if ($this->SliderSlides->save($sliderSlide)) {
-                $images = $this->getConfig('Cms.images');
+                $images = $this->getConfig('System.images');
                 $handler = new ImageFileHandler($this->getStorage(WWW_ROOT . 'media'), [
                     'thumbs' => [
                         'lg' => [$sliderSlide->slider->width, $sliderSlide->slider->height],
