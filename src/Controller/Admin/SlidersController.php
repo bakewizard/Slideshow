@@ -4,8 +4,7 @@ declare(strict_types=1);
 namespace Slideshow\Controller\Admin;
 
 use App\Attribute\Resource;
-use App\Controller\Admin\AppController;
-use App\Lib\ImageFileHandler;
+use App\Event\ImageFileHandler;
 use Cake\Cache\Cache;
 use Cake\Event\EventInterface;
 
@@ -122,7 +121,7 @@ class SlidersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $slider = $this->Sliders->get($id, contain: ['SliderSlides']);
         if ($this->Sliders->delete($slider)) {
-            $handler = new ImageFileHandler();
+            $handler = new ImageFileHandler($this->getStorage(WWW_ROOT . 'media'));
             $handler->remove($slider->slider_slides);
 
             $this->Flash->success(__('The slider has been deleted.'));

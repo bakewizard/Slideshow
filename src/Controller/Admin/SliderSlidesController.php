@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Slideshow\Controller\Admin;
 
 use App\Attribute\Resource;
-use App\Controller\Admin\AppController;
 use App\Event\ImageFileHandler;
 use App\Lib\ResourcesExplorer;
 use Cake\Cache\Cache;
@@ -84,6 +83,20 @@ class SliderSlidesController extends AppController
 
             $this->Flash->error(__('There were errors while adding the slide. Please, try again.'));
         }
+
+        $this->addCrumb(
+            'Slides',
+            [
+                'prefix' => 'Admin',
+                'plugin' => 'Slideshow',
+                'controller' => 'Sliders',
+                'action' => 'view',
+                $sliderSlide->slider_id,
+
+            ],
+        );
+        $this->addCrumb('add');
+
         $targets = ['_self' => __('This tab'), '_blank' => __('New tab')];
         $this->set(compact('sliderSlide', 'targets'));
     }
@@ -130,6 +143,19 @@ class SliderSlidesController extends AppController
             $this->Flash->error(__('The slide could not be saved. Please, try again.'));
         }
 
+        $this->addCrumb(
+            'Slides',
+            [
+                'prefix' => 'Admin',
+                'plugin' => 'Slideshow',
+                'controller' => 'Sliders',
+                'action' => 'view',
+                $sliderSlide->slider_id,
+
+            ],
+        );
+        $this->addCrumb('edit');
+
         $targets = ['_self' => __('This tab'), '_blank' => __('New tab')];
         $this->set(compact('sliderSlide', 'targets'));
     }
@@ -168,7 +194,11 @@ class SliderSlidesController extends AppController
     {
         $this->request->allowMethod(['post', 'put']);
         $sliderSlide = $this->SliderSlides->get($id);
-        if ($this->SliderSlides->moveUp($sliderSlide)) {
+
+        /** @var \ADmad\Sequence\Model\Behavior\SequenceBehavior $sequence */
+        $sequence = $this->SliderSlides->getBehavior('Sequence');
+
+        if ($sequence->moveUp($sliderSlide)) {
             $this->Flash->success('The slide has been moved up.');
         } else {
             $this->Flash->error('The slide could not be moved up. Please, try again.');
@@ -187,7 +217,11 @@ class SliderSlidesController extends AppController
     {
         $this->request->allowMethod(['post', 'put']);
         $sliderSlide = $this->SliderSlides->get($id);
-        if ($this->SliderSlides->moveDown($sliderSlide)) {
+
+        /** @var \ADmad\Sequence\Model\Behavior\SequenceBehavior $sequence */
+        $sequence = $this->SliderSlides->getBehavior('Sequence');
+
+        if ($sequence->moveDown($sliderSlide)) {
             $this->Flash->success('The slide has been moved down.');
         } else {
             $this->Flash->error('The slide could not be moved down. Please, try again.');
