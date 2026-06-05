@@ -84,7 +84,7 @@ class SliderSlidesController extends AppController
             $this->Flash->error(__('There were errors while adding the slide. Please, try again.'));
         }
 
-        $this->addCrumb(
+        $this->addBreadcrumb(
             'Slides',
             [
                 'prefix' => 'Admin',
@@ -95,7 +95,7 @@ class SliderSlidesController extends AppController
 
             ],
         );
-        $this->addCrumb('add');
+        $this->addBreadcrumb('add');
 
         $targets = ['_self' => __('This tab'), '_blank' => __('New tab')];
         $this->set(compact('sliderSlide', 'targets'));
@@ -143,7 +143,7 @@ class SliderSlidesController extends AppController
             $this->Flash->error(__('The slide could not be saved. Please, try again.'));
         }
 
-        $this->addCrumb(
+        $this->addBreadcrumb(
             'Slides',
             [
                 'prefix' => 'Admin',
@@ -154,7 +154,7 @@ class SliderSlidesController extends AppController
 
             ],
         );
-        $this->addCrumb('edit');
+        $this->addBreadcrumb('edit');
 
         $targets = ['_self' => __('This tab'), '_blank' => __('New tab')];
         $this->set(compact('sliderSlide', 'targets'));

@@ -27,7 +27,7 @@ class AppController extends BaseController
         $controller = $this->request->getParam('controller');
         $action = $this->request->getParam('action');
 
-        $this->addCrumb(
+        $this->addBreadcrumb(
             'Slideshow',
             [
                 'prefix' => 'Admin',
@@ -37,7 +37,7 @@ class AppController extends BaseController
             ],
         );
 
-        $this->addCrumb(
+        $this->addBreadcrumb(
             'Sliders',
             [
                 'prefix' => 'Admin',
@@ -48,7 +48,7 @@ class AppController extends BaseController
         );
 
         if ($controller === 'Sliders' && in_array($action, ['view', 'add', 'edit'])) {
-            $this->addCrumb($action);
+            $this->addBreadcrumb($action);
         }
     }
 }
